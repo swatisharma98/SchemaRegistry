@@ -30,6 +30,8 @@ public class CoffeeOrderProducer {
         KafkaProducer<String, byte[]> producer = new KafkaProducer<String, byte[]>(properties);
 
         CoffeeOrder coffeOrder = buildNewCoffeeOrder();
+        
+   
 
         byte[] value = coffeOrder.toByteBuffer().array();
 

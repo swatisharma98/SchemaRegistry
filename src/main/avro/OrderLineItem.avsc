@@ -16,6 +16,16 @@
       }
     },
     {
+    	"name":"cost",
+    	"type":{
+    		"type":"bytes",
+    		"logicalType":"decimal",
+    		"precision":3,
+    		"scale":2
+    	}
+    
+    },
+    {
       "name":"quantity",
       "type": "int"
     }

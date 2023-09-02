@@ -1,8 +1,12 @@
 package com.learnavro.util;
 
+import java.math.BigDecimal;
+import java.time.Instant;
+import java.util.List;
+
+
 import com.learnavro.domain.generated.*;
 
-import java.util.List;
 import java.util.Random;
 
 public class CoffeeOrderUtil {
@@ -19,7 +23,7 @@ public class CoffeeOrderUtil {
                 //.setFullName("Swati Sharma")
                 .setStore(generateStore())
                 .setOrderLineItems(generateOrderLineItems())
-                //.setOrderedTime(Instant.now())
+                .setOrderTime(Instant.now())
                 //.setPickUp(PickUp.IN_STORE)
                 // .setPickUpType(PickUp.IN_STORE)
                 .setStatus("NEW")
@@ -46,7 +50,7 @@ public class CoffeeOrderUtil {
                 .setName("Caffe Latte")
                 .setQuantity(1)
                 .setSize(Size.MEDIUM)
-                //.setCost(BigDecimal.valueOf(3.99))
+                .setCost(BigDecimal.valueOf(3.99))
                 .build();
 
         return List.of(orderLineItem);

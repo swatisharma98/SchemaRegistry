@@ -14,11 +14,14 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class OrderLineItem extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -5084804933786006927L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderLineItem\",\"namespace\":\"com.learnavro.domain.generated\",\"fields\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"size\",\"type\":{\"type\":\"enum\",\"name\":\"Size\",\"symbols\":[\"SMALL\",\"MEDIUM\",\"LARGE\"]}},{\"name\":\"quantity\",\"type\":\"int\"}]}");
+  private static final long serialVersionUID = 4568665307320639435L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderLineItem\",\"namespace\":\"com.learnavro.domain.generated\",\"fields\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"size\",\"type\":{\"type\":\"enum\",\"name\":\"Size\",\"symbols\":[\"SMALL\",\"MEDIUM\",\"LARGE\"]}},{\"name\":\"cost\",\"type\":{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":3,\"scale\":2}},{\"name\":\"quantity\",\"type\":\"int\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
+static {
+    MODEL$.addLogicalTypeConversion(new org.apache.avro.Conversions.DecimalConversion());
+  }
 
   private static final BinaryMessageEncoder<OrderLineItem> ENCODER =
       new BinaryMessageEncoder<OrderLineItem>(MODEL$, SCHEMA$);
@@ -73,6 +76,7 @@ public class OrderLineItem extends org.apache.avro.specific.SpecificRecordBase i
 
   @Deprecated public java.lang.CharSequence name;
   @Deprecated public com.learnavro.domain.generated.Size size;
+  @Deprecated public java.math.BigDecimal cost;
   @Deprecated public int quantity;
 
   /**
@@ -86,11 +90,13 @@ public class OrderLineItem extends org.apache.avro.specific.SpecificRecordBase i
    * All-args constructor.
    * @param name The new value for name
    * @param size The new value for size
+   * @param cost The new value for cost
    * @param quantity The new value for quantity
    */
-  public OrderLineItem(java.lang.CharSequence name, com.learnavro.domain.generated.Size size, java.lang.Integer quantity) {
+  public OrderLineItem(java.lang.CharSequence name, com.learnavro.domain.generated.Size size, java.math.BigDecimal cost, java.lang.Integer quantity) {
     this.name = name;
     this.size = size;
+    this.cost = cost;
     this.quantity = quantity;
   }
 
@@ -101,9 +107,24 @@ public class OrderLineItem extends org.apache.avro.specific.SpecificRecordBase i
     switch (field$) {
     case 0: return name;
     case 1: return size;
-    case 2: return quantity;
+    case 2: return cost;
+    case 3: return quantity;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
+  }
+
+  private static final org.apache.avro.Conversion<?>[] conversions =
+      new org.apache.avro.Conversion<?>[] {
+      null,
+      null,
+      new org.apache.avro.Conversions.DecimalConversion(),
+      null,
+      null
+  };
+
+  @Override
+  public org.apache.avro.Conversion<?> getConversion(int field) {
+    return conversions[field];
   }
 
   // Used by DatumReader.  Applications should not call.
@@ -112,7 +133,8 @@ public class OrderLineItem extends org.apache.avro.specific.SpecificRecordBase i
     switch (field$) {
     case 0: name = (java.lang.CharSequence)value$; break;
     case 1: size = (com.learnavro.domain.generated.Size)value$; break;
-    case 2: quantity = (java.lang.Integer)value$; break;
+    case 2: cost = (java.math.BigDecimal)value$; break;
+    case 3: quantity = (java.lang.Integer)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -149,6 +171,23 @@ public class OrderLineItem extends org.apache.avro.specific.SpecificRecordBase i
    */
   public void setSize(com.learnavro.domain.generated.Size value) {
     this.size = value;
+  }
+
+  /**
+   * Gets the value of the 'cost' field.
+   * @return The value of the 'cost' field.
+   */
+  public java.math.BigDecimal getCost() {
+    return cost;
+  }
+
+
+  /**
+   * Sets the value of the 'cost' field.
+   * @param value the value to set.
+   */
+  public void setCost(java.math.BigDecimal value) {
+    this.cost = value;
   }
 
   /**
@@ -211,6 +250,7 @@ public class OrderLineItem extends org.apache.avro.specific.SpecificRecordBase i
 
     private java.lang.CharSequence name;
     private com.learnavro.domain.generated.Size size;
+    private java.math.BigDecimal cost;
     private int quantity;
 
     /** Creates a new Builder */
@@ -232,9 +272,13 @@ public class OrderLineItem extends org.apache.avro.specific.SpecificRecordBase i
         this.size = data().deepCopy(fields()[1].schema(), other.size);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.quantity)) {
-        this.quantity = data().deepCopy(fields()[2].schema(), other.quantity);
+      if (isValidValue(fields()[2], other.cost)) {
+        this.cost = data().deepCopy(fields()[2].schema(), other.cost);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
+      }
+      if (isValidValue(fields()[3], other.quantity)) {
+        this.quantity = data().deepCopy(fields()[3].schema(), other.quantity);
+        fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
     }
 
@@ -252,9 +296,13 @@ public class OrderLineItem extends org.apache.avro.specific.SpecificRecordBase i
         this.size = data().deepCopy(fields()[1].schema(), other.size);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.quantity)) {
-        this.quantity = data().deepCopy(fields()[2].schema(), other.quantity);
+      if (isValidValue(fields()[2], other.cost)) {
+        this.cost = data().deepCopy(fields()[2].schema(), other.cost);
         fieldSetFlags()[2] = true;
+      }
+      if (isValidValue(fields()[3], other.quantity)) {
+        this.quantity = data().deepCopy(fields()[3].schema(), other.quantity);
+        fieldSetFlags()[3] = true;
       }
     }
 
@@ -339,6 +387,46 @@ public class OrderLineItem extends org.apache.avro.specific.SpecificRecordBase i
     }
 
     /**
+      * Gets the value of the 'cost' field.
+      * @return The value.
+      */
+    public java.math.BigDecimal getCost() {
+      return cost;
+    }
+
+
+    /**
+      * Sets the value of the 'cost' field.
+      * @param value The value of 'cost'.
+      * @return This builder.
+      */
+    public com.learnavro.domain.generated.OrderLineItem.Builder setCost(java.math.BigDecimal value) {
+      validate(fields()[2], value);
+      this.cost = value;
+      fieldSetFlags()[2] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'cost' field has been set.
+      * @return True if the 'cost' field has been set, false otherwise.
+      */
+    public boolean hasCost() {
+      return fieldSetFlags()[2];
+    }
+
+
+    /**
+      * Clears the value of the 'cost' field.
+      * @return This builder.
+      */
+    public com.learnavro.domain.generated.OrderLineItem.Builder clearCost() {
+      cost = null;
+      fieldSetFlags()[2] = false;
+      return this;
+    }
+
+    /**
       * Gets the value of the 'quantity' field.
       * @return The value.
       */
@@ -353,9 +441,9 @@ public class OrderLineItem extends org.apache.avro.specific.SpecificRecordBase i
       * @return This builder.
       */
     public com.learnavro.domain.generated.OrderLineItem.Builder setQuantity(int value) {
-      validate(fields()[2], value);
+      validate(fields()[3], value);
       this.quantity = value;
-      fieldSetFlags()[2] = true;
+      fieldSetFlags()[3] = true;
       return this;
     }
 
@@ -364,7 +452,7 @@ public class OrderLineItem extends org.apache.avro.specific.SpecificRecordBase i
       * @return True if the 'quantity' field has been set, false otherwise.
       */
     public boolean hasQuantity() {
-      return fieldSetFlags()[2];
+      return fieldSetFlags()[3];
     }
 
 
@@ -373,7 +461,7 @@ public class OrderLineItem extends org.apache.avro.specific.SpecificRecordBase i
       * @return This builder.
       */
     public com.learnavro.domain.generated.OrderLineItem.Builder clearQuantity() {
-      fieldSetFlags()[2] = false;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -384,7 +472,8 @@ public class OrderLineItem extends org.apache.avro.specific.SpecificRecordBase i
         OrderLineItem record = new OrderLineItem();
         record.name = fieldSetFlags()[0] ? this.name : (java.lang.CharSequence) defaultValue(fields()[0]);
         record.size = fieldSetFlags()[1] ? this.size : (com.learnavro.domain.generated.Size) defaultValue(fields()[1]);
-        record.quantity = fieldSetFlags()[2] ? this.quantity : (java.lang.Integer) defaultValue(fields()[2]);
+        record.cost = fieldSetFlags()[2] ? this.cost : (java.math.BigDecimal) defaultValue(fields()[2]);
+        record.quantity = fieldSetFlags()[3] ? this.quantity : (java.lang.Integer) defaultValue(fields()[3]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -412,51 +501,6 @@ public class OrderLineItem extends org.apache.avro.specific.SpecificRecordBase i
     READER$.read(this, SpecificData.getDecoder(in));
   }
 
-  @Override protected boolean hasCustomCoders() { return true; }
-
-  @Override public void customEncode(org.apache.avro.io.Encoder out)
-    throws java.io.IOException
-  {
-    out.writeString(this.name);
-
-    out.writeEnum(this.size.ordinal());
-
-    out.writeInt(this.quantity);
-
-  }
-
-  @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
-    throws java.io.IOException
-  {
-    org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
-    if (fieldOrder == null) {
-      this.name = in.readString(this.name instanceof Utf8 ? (Utf8)this.name : null);
-
-      this.size = com.learnavro.domain.generated.Size.values()[in.readEnum()];
-
-      this.quantity = in.readInt();
-
-    } else {
-      for (int i = 0; i < 3; i++) {
-        switch (fieldOrder[i].pos()) {
-        case 0:
-          this.name = in.readString(this.name instanceof Utf8 ? (Utf8)this.name : null);
-          break;
-
-        case 1:
-          this.size = com.learnavro.domain.generated.Size.values()[in.readEnum()];
-          break;
-
-        case 2:
-          this.quantity = in.readInt();
-          break;
-
-        default:
-          throw new java.io.IOException("Corrupt ResolvingDecoder.");
-        }
-      }
-    }
-  }
 }
 
 
