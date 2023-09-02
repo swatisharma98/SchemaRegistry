@@ -15,8 +15,8 @@ public class CoffeeOrderUtil {
         return CoffeeOrder.newBuilder()
                 .setId(randomId())
                 .setName("Swati Sharma")
-                //.setNickName("DS")
-                //.setFullName("Dilip Sundarraj")
+                //.setNickName("SS")
+                //.setFullName("Swati Sharma")
                 .setStore(generateStore())
                 .setOrderLineItems(generateOrderLineItems())
                 //.setOrderedTime(Instant.now())
@@ -32,7 +32,7 @@ public class CoffeeOrderUtil {
 //
 //        return CoffeeOrderOld.newBuilder()
 //                .setId(randomId())
-//                .setName("Chicago 1234")
+//                .setName("Gurgaon 1234")
 //                .setStore(generateStore())
 //                .setOrderLineItems(generateOrderLineItems())
 //                .build();
